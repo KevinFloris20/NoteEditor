@@ -57,10 +57,9 @@ const handleNoteSave = function () {
   };
 
   saveNote(newNote).then(() => {
-    getAndRenderNotes();
     renderActiveNote();
-  });
-};
+    getAndRenderNotes();
+  })};
 
 // Delete the clicked note
 const handleNoteDelete = function (event) {
@@ -74,8 +73,8 @@ const handleNoteDelete = function (event) {
   }
 
   deleteNote(note.id).then(() => {
-    getAndRenderNotes();
     renderActiveNote();
+    getAndRenderNotes();
   });
 };
 
@@ -141,9 +140,12 @@ const getAndRenderNotes = () => {
 };
 
 $saveNoteBtn.on("click", handleNoteSave);
+$saveNoteBtn.on("click", getAndRenderNotes);
+$saveNoteBtn.on("click", handleNoteView);
 $noteList.on("click", ".list-group-item", handleNoteView);
 $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);
+$noteList.on("click", ".delete-note", getAndRenderNotes);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
 
